@@ -13,12 +13,14 @@ function Header() {
     </div>
     <div className="flex gap-2">
       <div className="bg-white/20 p-2 rounded-full">🔔</div>
-      <div className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white overflow-hidden">
-      </div>
+     
     </div>
   </div>
   
- 
+  <div className="mt-6 flex gap-2">
+    <input type="text" placeholder="Search" className="flex-1 p-3 rounded-xl text-black bg-white "/>
+    <button className="bg-indigo-800 p-3 rounded-xl">Tune</button>
+  </div>
 </div>
   );
 }
