@@ -15,6 +15,6 @@ function StatusBadge({ status }) {
       {status}
     </span>
   );
-};;;;jj
+}
 
 export default StatusBadge;
