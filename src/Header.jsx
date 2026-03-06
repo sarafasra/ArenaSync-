@@ -1,14 +1,25 @@
 import React from "react";
 import '../styles/app.css'
-import myImage from "./image.jpg";
+
+import search from "./search.jpg";
+
 function Header() {
   return (
-    <div className="  flex flex-col items-center justify-start h-screen p-4 " >
-      <h1 className="text-xl font-bold text-red-600">Good Morning  <br />Samuel Walker!</h1>
-<input type="text" placeholder="search"   className="border  rounded mb-2"  />
-
-  <img src={myImage} alt="image" className="w-77 h-70 object-cover" />
+    <div className="bg-blue-600 p-6 pb-16  text-white">
+  <div className="flex justify-between items-center">
+    <div>
+      <p className="text-sm opacity-80">Good Morning,</p>
+      <h1 className="text-xl font-bold">Samuel Walker!</h1>
     </div>
+    <div className="flex gap-2">
+      <div className="bg-white/20 p-2 rounded-full">🔔</div>
+      <div className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white overflow-hidden">
+      </div>
+    </div>
+  </div>
+  
+ 
+</div>
   );
 }
 
