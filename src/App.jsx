@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <Header />
-      
+
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         {tournamentData.map((tournament) => (
