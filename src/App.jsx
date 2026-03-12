@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import '../styles/app.css';
 import Header from './Header.jsx';
 import TournamentCard from "./components/TournamentCard.jsx";
 import { tournamentData } from "./data/tournamentDB.jsx";
+import RegistrationForm from "./components/RegistrationForm.jsx";
 
 function App() {
   return (
@@ -17,9 +18,24 @@ function App() {
             tournament={tournament}
           />
         ))}
+        <div>
+
+      <RegistrationForm onSubmit={addParticipant} />
+
+      <h2>Liste des participants</h2>
+      <ul>
+        {participants.map((p, i) => (
+          <li key={i}>
+            {p.name} - {p.equipe} - {p.niveau}
+          </li>
+        ))}
+      </ul>
+    </div>
       </div>
+
         
     </div>
+    
   );
 }
 
