@@ -32,15 +32,8 @@ function App() {
 
         <RegistrationForm onSubmit={addParticipant} />
 
-        <h2>Liste des participants</h2>
 
-        <ul>
-          {participants.map((p, i) => (
-            <li key={i}>
-              {p.name} - {p.equipe} - {p.niveau}
-            </li>
-          ))}
-        </ul>
+   
 
       </div>
 

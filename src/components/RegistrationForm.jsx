@@ -4,7 +4,6 @@ export default function RegistrationForm({onSubmit}){
     const [equipe,setEquipe]=useState("");
     const [niveau,setNiveau]=useState("");
       const isNameValid = name.length >= 3;
-    const isNameVaild =name.trim().length >= 3;
     const isFormValid = isNameValid;
     const handleSubmit = (e) => {
     e.preventDefault(); 
@@ -20,7 +19,7 @@ export default function RegistrationForm({onSubmit}){
 
       <input
         type="text"
-        placeholder="Nam"
+        placeholder="Nom"
         value={name}
         onChange={(e) => setName(e.target.value)}
         className="border p-2 rounded "
@@ -40,8 +39,7 @@ export default function RegistrationForm({onSubmit}){
         className="border p-2 rounded"
       />
       <button type="submit" 
-      disabled={name.length < 3}
-        className="bg-blue-500 text-white p-2 rounded disabled:bg-gray-300"
+        className="bg-blue-600 text-white p-2 rounded disabled:bg-gray-300"
         >
         Valider
       </button>

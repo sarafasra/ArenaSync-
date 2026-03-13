@@ -1,38 +1,44 @@
 import { useState } from "react";
-import StatusBadge from "./StatusBadge";
+import RegistrationForm from "./RegistrationForm";
 
 export default function TournamentCard({ tournament }) {
-    const [isRegistered, setIsRegistered] = useState(false)
 
-  return (
-    <div className="bg-white p-4 rounded-xl shadow mt-4">
+const [isRegistered, setIsRegistered] = useState(false);
+const [showForm, setShowForm] = useState(false);
 
-      <div className="flex justify-between items-center">
-        <h2 className="font-semibold">{tournament.title}</h2>
-        <StatusBadge status={tournament.status} />
-        
-      </div>
+const handleClick = () => {
 
-      <p className="text-gray-500 text-sm mt-2">
-        {tournament.description}
-      </p>
+if(!isRegistered){
+setShowForm(true);   // يبان الفورمولير
+}
 
-      <button
-onClick={()=>setIsRegistered(!isRegistered)}
-className={isRegistered ? "bg-red-500 text-white p-2   rounded-[18px]"  : "bg-green-500 text-white p-2 rounded-[18px]"}
+setIsRegistered(!isRegistered);
+
+}
+
+return(
+
+<div className="bg-white p-4 rounded-xl shadow">
+
+<h2>{tournament.title}</h2>
+
+<p>{tournament.description}</p>
+
+<button
+onClick={handleClick}
+className={  "bg-green-500 text-white p-2 rounded"}
 >
-    {isRegistered ? "Se désinscrire" : "S'inscrire"}
+
+{ "S'inscrire"}
 
 </button>
 
-      <div className="text-sm mt-3 space-y-1 text-gray-600">
-        <p>👥 {tournament.participants.length} participants</p>
-        <p>🏆 {tournament.type}</p>
-        <p>📅 {tournament.date}</p>
-        <p>📍 {tournament.location}</p>
-      </div>
+{/* الفورمولير يبان غير منين نكليكي */}
 
-    </div>
-  );
+{showForm && <RegistrationForm />}
+
+</div>
+
+)
+
 }
-
