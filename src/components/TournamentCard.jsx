@@ -1,44 +1,45 @@
 import { useState } from "react";
+import StatusBadge from "./StatusBadge";
 import RegistrationForm from "./RegistrationForm";
 
-export default function TournamentCard({ tournament }) {
+export default function TournamentCard({ tournament, onSubmit }) {
 
-const [isRegistered, setIsRegistered] = useState(false);
-const [showForm, setShowForm] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
-const handleClick = () => {
+  const handleRegister = () => {
+    setIsRegistered(!isRegistered);
+    setShowForm(true);
+  };
 
-if(!isRegistered){
-setShowForm(true);   // يبان الفورمولير
-}
+  return (
+    <div className="bg-white p-4 rounded-xl shadow mt-4">
 
-setIsRegistered(!isRegistered);
+      <div className="flex justify-between items-center">
+        <h2 className="font-semibold">{tournament.title}</h2>
+        <StatusBadge status={tournament.status} />
+      </div>
 
-}
+      <p className="text-gray-500 text-sm mt-2">
+        {tournament.description}
+      </p>
 
-return(
-
-<div className="bg-white p-4 rounded-xl shadow">
-
-<h2>{tournament.title}</h2>
-
-<p>{tournament.description}</p>
-
-<button
-onClick={handleClick}
-className={  "bg-green-500 text-white p-2 rounded"}
+   <button
+  onClick={handleRegister}
+  className="bg-green-500 text-white p-2 rounded-[18px]"
 >
-
-{ "S'inscrire"}
-
+S'inscrire
 </button>
 
-{/* الفورمولير يبان غير منين نكليكي */}
+      {showForm && <RegistrationForm onSubmit={onSubmit} />}
 
-{showForm && <RegistrationForm />}
+      <div className="text-sm mt-3 space-y-1 text-gray-600">
+        <p>👥 {tournament.participants.length} participants</p>
+        <p>🏆 {tournament.type}</p>
+        <p>📅 {tournament.date}</p>
+        <p>📍 {tournament.location}</p>
+      </div>
 
-</div>
-
-)
-
+    </div>
+  );
 }
