@@ -7,20 +7,15 @@ function App() {
   const [tournaments, setTournaments] = useState(tournamentData);
   const [searchTerm, setSearchTerm] = useState("");
 
-const addParticipant = (participant, tournamentId) => {
-  // juste ajouter le participant direct dans la carte
-  setTournaments((prev) =>
-    prev.map((t) => {
-      if (t.id === tournamentId) {
-        return {
-          ...t,
-          participants: [...t.participants, participant] // simple push
-        };
-      }
-      return t;
-    })
-  );
-};
+  const addParticipant = (participant, tournamentId) => {
+    setTournaments((prev) =>
+      prev.map((t) =>
+        t.id === tournamentId
+          ? { ...t, participants: [...t.participants, participant] }
+          : t
+      )
+    );
+  };
 
   const filteredTournaments = tournaments.filter((t) =>
     t.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -31,11 +26,11 @@ const addParticipant = (participant, tournamentId) => {
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-        {filteredTournaments.map((tournament) => (
+        {filteredTournaments.map((t) => (
           <TournamentCard
-            key={tournament.id}
-            tournament={tournament}
-            onSubmit={(participant) => addParticipant(participant, tournament.id)}
+            key={t.id}
+            tournament={t}
+            onSubmit={(p) => addParticipant(p, t.id)} 
           />
         ))}
       </div>

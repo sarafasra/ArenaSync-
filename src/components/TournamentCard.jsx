@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RegistrationForm from "./RegistrationForm";
+import RegistrationForm from "./RegistrationForm.jsx";
 
 export default function TournamentCard({ tournament, onSubmit }) {
   const [showForm, setShowForm] = useState(false);
@@ -14,13 +14,15 @@ export default function TournamentCard({ tournament, onSubmit }) {
 
       <button
         onClick={() => setShowForm(!showForm)}
-        className="bg-green-500 text-white p-2 rounded-[18px]"
+        className="bg-green-500 text-white p-2 rounded-[18px] mt-2"
       >
         S'inscrire
       </button>
 
       {showForm && (
-        <RegistrationForm onSubmit={(participant) => onSubmit(participant)} />
+        <RegistrationForm
+          onSubmit={(participant) => onSubmit(participant)}
+        />
       )}
 
       <div className="text-sm mt-3 space-y-1 text-gray-600">
@@ -29,6 +31,19 @@ export default function TournamentCard({ tournament, onSubmit }) {
         <p>📅 {tournament.date}</p>
         <p>📍 {tournament.location}</p>
       </div>
+
+      {tournament.participants.length > 0 && (
+        <div className="mt-3 text-sm text-gray-700">
+          <p className="font-semibold">Participants:</p>
+          <ul className="list-disc ml-5">
+            {tournament.participants.map((p, i) => (
+              <li key={i}>
+                {p.name} - {p.equipe} - {p.niveau}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
