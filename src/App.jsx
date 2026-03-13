@@ -1,50 +1,44 @@
 import React, { useState } from "react";
-import "../styles/app.css";
 import Header from "./Header.jsx";
 import TournamentCard from "./components/TournamentCard.jsx";
-import { tournamentData } from "./data/tournamentDB.jsx";
+import { tournamentData } from "./data/tournamentDB.jsX";
 
 function App() {
+  const [tournaments, setTournaments] = useState(tournamentData);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const [participants, setParticipants] = useState([]);
+const addParticipant = (participant, tournamentId) => {
+  // juste ajouter le participant direct dans la carte
+  setTournaments((prev) =>
+    prev.map((t) => {
+      if (t.id === tournamentId) {
+        return {
+          ...t,
+          participants: [...t.participants, participant] // simple push
+        };
+      }
+      return t;
+    })
+  );
+};
 
-  const addParticipant = (participant) => {
-    setParticipants([...participants, participant]);
-  };
+  const filteredTournaments = tournaments.filter((t) =>
+    t.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
-
-      <Header />
+      <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-
-        {tournamentData.map((tournament) => (
-
+        {filteredTournaments.map((tournament) => (
           <TournamentCard
             key={tournament.id}
             tournament={tournament}
-            onSubmit={addParticipant}
+            onSubmit={(participant) => addParticipant(participant, tournament.id)}
           />
-
         ))}
-
       </div>
-
-      <div>
-
-        <h2>Liste des participants</h2>
-
-        <ul>
-          {participants.map((p, i) => (
-            <li key={i}>
-              {p.name} - {p.equipe} - {p.niveau}
-            </li>
-          ))}
-        </ul>
-
-      </div>
-
     </div>
   );
 }
